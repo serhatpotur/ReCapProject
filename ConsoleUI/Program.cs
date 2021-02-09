@@ -12,7 +12,7 @@ namespace ConsoleUI
             ICarService carService = new CarManager(new InMemoryCarDal());
             foreach (var item in carService.GetAll())
             {
-                Console.WriteLine(item.ModelYear + "-" + item.Description);
+                Console.WriteLine(item.ModelYear + "-" + item.Description); 
             }
         }
     }
