@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entity.Abstract
 {
-    interface IEntity
+    public interface IEntity
     {
     }
 }
