@@ -8,23 +8,54 @@ using System;
 namespace ConsoleUI
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
-            EfCarDal efCarDal = new EfCarDal();
-            efCarDal.Add(new Car
+            //BrandTest();
+            //BrandTest2();
+            //ColorTest();
+            //Data Transformation Object
+
+            DTO();
+
+
+        }
+
+        private static void DTO()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.GetCarDetails())
             {
-                Id = 1,
-                BrandId = 1,
-                ColorId = 1,
-                DailyPrice = 55000,
-                Description = "2020 Model Araç",
-                ModelYear = 2020
-            });
-            ICarService carService = new CarManager(efCarDal);
-            foreach (var item in carService.GetAll())
+                Console.WriteLine("{0} : {1} : {2} : {3}", car.BrandName, car.CarName, car.ColorName, car.DailyPrice);
+
+            }
+        }
+
+        private static void ColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var color in colorManager.GetAll())
             {
-                Console.WriteLine(item.DailyPrice + "-" + item.Description); 
+                Console.WriteLine(color.ColorName);
+
+            }
+        }
+
+        private static void BrandTest2()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            var brand = brandManager.GetById(3);
+            Console.WriteLine(brand.BrandName);
+        }
+
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine(brand.BrandName);
+
             }
         }
     }

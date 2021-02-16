@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.Entity_Framework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Business.Concrete
 
         public void Add(Brand brand)
         {
+
             _brandDal.Add(brand);
         }
 
@@ -26,9 +28,14 @@ namespace Business.Concrete
             _brandDal.Delete(brand);
         }
 
-        public List<Brand> GetAllByColor()
+        public List<Brand> GetAll()
         {
             return _brandDal.GetAll();
+        }
+
+        public Brand GetById(int brandId)
+        {
+            return _brandDal.Get(b => b.Id == brandId);
         }
 
         public void Update(Brand brand)
