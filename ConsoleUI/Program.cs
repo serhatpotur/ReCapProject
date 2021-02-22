@@ -18,7 +18,12 @@ namespace ConsoleUI
             // DTO();
             //CreateACar();
             //CarGetAll();
-            //CreateRental();
+            CreateRental();
+            //GetByRental();
+        }
+
+        private static void GetByRental()
+        {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             var result = rentalManager.GetAll();
             if (result.Success == true)
@@ -38,22 +43,22 @@ namespace ConsoleUI
 
         private static void CreateRental()
         {
-            ////UserManager userManager = new UserManager(new EfUserDal());
-            ////userManager.Add(new User { Id = 1, FirstName = "Serhat", LastName = "Potur", Email = "sp1@gmail.com", Password = "123" });
-            ////CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            ////customerManager.Add(new Customer { Id = 1, UserId = 1, CompanyName = "Potur A.S" });
+            
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Add(new Rental { Id = 1, CarId = 5, CustomerId = 1, RentDate = DateTime.Now, ReturnDate = null });
+            Rental rental1 = new Rental { CarId = 5, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null };
+
+            rentalManager.Add(rental1);
+            Console.WriteLine(rentalManager.Add(rental1).Message);
         }
 
         private static void CreateACar()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Add(new Brand { Id = 7, BrandName = "FIAT" });
+            brandManager.Add(new Brand {BrandName = "FIAT" });
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Add(new Color { Id = 7, ColorName = "Bordo" });
-            carManager.Add(new Car { Id = 8, BrandId = 7, ColorId = 7, CarName = "Albea", DailyPrice = 30000, ModelYear = 2012 });
+            colorManager.Add(new Color {  ColorName = "Bordo" });
+            carManager.Add(new Car { BrandId = 7, ColorId = 7, CarName = "Albea", DailyPrice = 30000, ModelYear = 2012 });
         }
 
         private static void CarGetAll()
@@ -71,7 +76,7 @@ namespace ConsoleUI
             else
             {
                 Console.WriteLine(result.Message);
-               
+
             }
         }
 

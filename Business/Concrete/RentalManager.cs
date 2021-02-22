@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,8 +20,17 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
+            var rentedCarList = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            foreach (var car in rentedCarList)
+            {
+                if (car.ReturnDate == null)
+                {
+                    return new ErrorResult(Messages.NoRental);
+                }
+            }
             _rentalDal.Add(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalAdded);
+
         }
 
         public IResult Delete(Rental rental)
@@ -36,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetCustomerById(int customerId)
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(q=>q.CustomerId==customerId));
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(q => q.CustomerId == customerId));
 
         }
 
