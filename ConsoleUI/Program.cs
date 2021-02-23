@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.Entity_Framework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 
@@ -58,7 +57,7 @@ namespace ConsoleUI
             brandManager.Add(new Brand {BrandName = "FIAT" });
             ColorManager colorManager = new ColorManager(new EfColorDal());
             colorManager.Add(new Color {  ColorName = "Bordo" });
-            carManager.Add(new Car { BrandId = 7, ColorId = 7, CarName = "Albea", DailyPrice = 30000, ModelYear = 2012 });
+            carManager.Add(new Car { BrandId = 7, ColorId = 7, Description = "Albea", DailyPrice = 30000, ModelYear = 2012 });
         }
 
         private static void CarGetAll()
@@ -69,7 +68,7 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine("{0} - {1} - {2}", car.Id, car.CarName, car.DailyPrice + " TL");
+                    Console.WriteLine("{0} - {1} - {2}", car.Id, car.Description, car.DailyPrice + " TL");
 
                 }
             }
@@ -88,7 +87,7 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine("{0} - {1} - {2} - {3}", car.BrandName, car.CarName, car.ColorName, car.DailyPrice + " TL");
+                    Console.WriteLine("{0} - {1} - {2} - {3}", car.BrandName, car.Description, car.ColorName, car.DailyPrice + " TL");
 
                 }
             }
@@ -109,12 +108,12 @@ namespace ConsoleUI
         //    }
         //}
 
-        private static void BrandTest2()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            var brand = brandManager.GetById(3);
-            Console.WriteLine(brand.BrandName);
-        }
+        //private static void BrandTest2()
+        //{
+        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
+        //    var brand = brandManager.GetById(3);
+        //    Console.WriteLine(brand.);
+        //}
 
         //private static void BrandTest()
         //{
